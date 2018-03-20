@@ -20,7 +20,7 @@ if [ "$lxcbin" != "" ]; then
             fi
         elif [[ $1 == "shell" ]]; then
             shift
-            lxc exec $@ -- /bin/zsh --login
+            lxc exec $@ -- /bin/sh -lc zsh
         elif [[ $1 == "exec" ]]; then
             NEWARGS=()
             shift
