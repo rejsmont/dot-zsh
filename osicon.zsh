@@ -68,7 +68,7 @@ function os_detect() {
             OS='AOSC'
             OS_ICON=$LINUX_AOSC_ICON
             ;;
-            "centos")
+            "centos"|"\"centos\"")
             OS='CentOS'
             OS_ICON=$LINUX_CENTOS_ICON
             ;;
