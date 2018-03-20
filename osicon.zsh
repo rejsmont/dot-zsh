@@ -50,7 +50,11 @@ function os_detect() {
           OS_ICON=$FREEBSD_ICON
           ;;
         Linux)
-          os_release_id="$(grep -E '^ID=([a-zA-Z]*)' /etc/os-release | cut -d '=' -f 2)"
+          if [[ -f /etc/os-release ]]; then
+              os_release_id="$(grep -E '^ID=([a-zA-Z]*)' /etc/os-release | cut -d '=' -f 2)"
+          else
+              os_release_id="linux"
+          fi
           case "$os_release_id" in
             "arch")
             OS='Arch'
