@@ -1,5 +1,5 @@
 # Function for exhanced lxd handling
-lxcbin=$( which lxc > /dev/null 2>&1 || true )
+lxcbin=$( which lxc 2>/dev/null || true )
 
 if [ "$lxcbin" != "" ]; then
     set_default LXC_VM 'ubuntu-containers'
