@@ -36,7 +36,11 @@ POWERLEVEL9K_CONTAINER_ICON='\uF6A6'        # 
 
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=6
 POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%{$(iterm2_prompt_mark)%}╰─ "
+if typeset -f iterm2_prompt_mark > /dev/null; then
+    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%{$(iterm2_prompt_mark)%}╰─ "
+else
+    POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─ "
+fi
 
 ################################################################
 # Host: machine (where am I)
@@ -200,7 +204,9 @@ prompt_dir() {
 
   if [[ "${POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER}" == "true" ]]; then
     local current_path_first="${current_path[1,1]}"
-    current_path="${current_path[2,-1]}"
+    if [[ "${current_path_first}" != "${POWERLEVEL9K_SHORTEN_DELIMITER[1,1]}" ]]; then
+        current_path="${current_path[2,-1]}"
+    fi
   fi
 
   if [[ "${POWERLEVEL9K_DIR_PATH_SEPARATOR}" != "/" ]]; then
