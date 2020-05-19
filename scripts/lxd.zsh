@@ -1,8 +1,9 @@
 # Function for exhanced lxd handling
+unset -f lxc 2>/dev/null
 lxcbin=$( which lxc 2>/dev/null || true )
 
 if [ "$lxcbin" != "" ]; then
-    set_default LXC_VM 'ubuntu-containers'
+    export LXC_VM='ubuntu-containers'
     function lxc() {
         if [[ $1 == "vm" && `uname -a` != *"Linux"* ]]; then
             if [[ $2 == "start" ]]; then

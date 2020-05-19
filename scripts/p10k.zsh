@@ -412,16 +412,28 @@
       local icon=''
       local state='SUDO'
       local content="%n"
+      local fg=15
+      local bg=31
+    elif [[ ! $USER == 'root' ]]; then
+      local icon=''
+      local state='ROOT'
+      local content="%n"
+      local fg=15
+      local bg=160
     elif [[ ! ${USER%@*} == ${USER} ]]; then
       local icon=''
       local state='DOMAIN'
       local content=${USER%@*}
+      local fg=15
+      local bg=31
     else
       local icon=''
       local state='DEFAULT'
       local content="%n"
+      local fg=15
+      local bg=31
     fi
-    p10k segment -f 15 -b 31 -s $state -i $icon -t $content
+    p10k segment -f $fg -b $bg -s $state -i $icon -t $content
   }
 
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
