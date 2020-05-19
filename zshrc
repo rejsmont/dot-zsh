@@ -41,9 +41,7 @@ source ~/.zsh/frameworks/antigen.zsh
 antigen use oh-my-zsh
 
 if [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then
-    source ~/.zsh/frameworks/iterm2/iterm2_shell_integration.zsh
-    ln -sf ~/.zsh/frameworks/iterm2/bin ~/.iterm2
-    PATH="$PATH:~/.iterm2"
+    source ~/.zsh/frameworks/iterm2_shell_integration.zsh
     antigen bundle iterm2
 fi
 
