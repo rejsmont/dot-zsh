@@ -44,14 +44,14 @@ if [ "$lxcbin" != "" ]; then
                         ;;
                     *)
                         NEWARGS+=("$1")
-                        HOST=`echo $1 | cut -s -d: -f 1`
-                        if [[ "${HOST}" == "" ]]; then HOST=$(lxc remote list | grep '(default) | ' | cut -d ' ' -f 2); fi
+                        LXC_HOST=`echo $1 | cut -s -d: -f 1`
+                        if [[ "${LXC_HOST}" == "" ]]; then LXC_HOST=$(lxc remote list | grep '(default) | ' | cut -d ' ' -f 2); fi
                         shift
                         ;;
                 esac
             done
-            if [[ "x$HOST" != 'xlocal' ]]; then
-                $lxcbin exec --env container_host=${HOST} ${NEWARGS[@]} $@
+            if [[ "x$LXC_HOST" != 'xlocal' ]]; then
+                $lxcbin exec --env container_host=${LXC_HOST} ${NEWARGS[@]} $@
             else
                 $lxcbin exec ${NEWARGS[@]} $@
             fi
