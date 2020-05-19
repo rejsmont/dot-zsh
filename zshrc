@@ -1,3 +1,5 @@
+source ~/.profile
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -55,8 +57,6 @@ if [[ ! -d ~/.zsh ]]; then
 fi
 
 ADOTDIR="$HOME/.zsh/antigen"
-
-source ~/.profile
 source ~/.zsh/frameworks/antigen.zsh
 
 # Load the oh-my-zsh's library.
