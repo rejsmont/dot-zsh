@@ -15,17 +15,17 @@ function zsh_install() {
     echo "Installing iTerm2 integration..."
     curl -L https://iterm2.com/shell_integration/zsh -o ~/.zsh/frameworks/iterm2_shell_integration.zsh
     echo "Installing custom scripts..."
+    curl -L https://github.com/rejsmont/.zsh/tarball/master | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
 }
 
 function zsh_update() {
-    rm ~/.zsh/frameworks/*.zsh
     echo "Updating antigen..."
     curl -L git.io/antigen > .zsh/frameworks/antigen.zsh
     antigen update
     echo "Updating iTerm2 integration..."
     curl -L https://iterm2.com/shell_integration/zsh -o ~/.zsh/frameworks/iterm2_shell_integration.zsh
     echo "Updating custom scripts..."
-    rm ~/.zsh/*.zsh
+    curl -L https://github.com/rejsmont/.zsh/tarball/master | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
 }
 
 if [[ ! -d ~/.zsh ]]; then
