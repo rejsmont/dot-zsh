@@ -382,7 +382,7 @@
       [[ -n $P9K_CONTAINER_HOST ]] && return
       if [[ -n $container_host ]]; then
         P9K_CONTAINER_HOST="$container_host"
-        typeset -g POWERLEVEL9K_HOST_TEMPLATE="$P9K_CONTAINER_HOST:$_POWERLEVEL9K_HOST_TEMPLATE"
+        typeset -g POWERLEVEL9K_HOST_TEMPLATE="$P9K_CONTAINER_HOST:%m"
       fi
       return 0
     fi
