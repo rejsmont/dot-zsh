@@ -45,12 +45,15 @@ if [ "$lxcbin" != "" ]; then
                     *)
                         NEWARGS+=("$1")
                         HOST=`echo $1 | cut -s -d: -f 1`
-                        if [[ "${HOST}" == "" ]]; then HOST="default"; fi
+                        if [[ "${HOST}" == "" ]]; then HOST=$(lxc remote list --format csv | cut -d ',' -f 1 | grep '(default)' | sed 's/ (default)//'); fi
                         shift
                         ;;
                 esac
             done
-            $lxcbin exec --env CONTAINER_HOST=${HOST} ${NEWARGS[@]} $@
+            if [[ "x$HOST" != 'xlocal' ]]; then
+                $lxcbin exec --env container_host=${HOST} ${NEWARGS[@]} $@
+            else
+                $lxcbin exec ${NEWARGS[@]} $@
         else
             $lxcbin $@
         fi
