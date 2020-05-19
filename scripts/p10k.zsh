@@ -409,12 +409,12 @@
 
   prompt_my_user() {
     if [[ -n "$SUDO_COMMAND" ]]; then
-      local icon=''
+      local icon=''
       local state='SUDO'
       local content="%n"
       local fg=15
-      local bg=31
-    elif [[ ! $USER == 'root' ]]; then
+      local bg=160
+    elif [[ $USER == 'root' ]]; then
       local icon=''
       local state='ROOT'
       local content="%n"
