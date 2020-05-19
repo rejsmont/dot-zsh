@@ -390,7 +390,7 @@
 
   _init_container
 
-  prompt_my_host() {
+  function prompt_my_host() {
     if (( P9K_SSH )); then
       local icon=''
       local state='SSH'
@@ -402,8 +402,12 @@
     fi
     p10k segment -f 220 -b 166 -s $state -i $icon -t $_POWERLEVEL9K_HOST_TEMPLATE
   }
+  
+  function instant_prompt_my_host() {
+    prompt_my_host
+  }
 
-  prompt_my_user() {
+  function prompt_my_user() {
     if [[ -n "$SUDO_COMMAND" ]]; then
       local icon=''
       local state='SUDO'
@@ -430,6 +434,10 @@
       local bg=31
     fi
     p10k segment -f $fg -b $bg -s $state -i $icon -t $content
+  }
+
+  function instant_prompt_my_user() {
+    prompt_my_user
   }
 
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
