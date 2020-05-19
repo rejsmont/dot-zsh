@@ -54,6 +54,7 @@ if [ "$lxcbin" != "" ]; then
                 $lxcbin exec --env container_host=${HOST} ${NEWARGS[@]} $@
             else
                 $lxcbin exec ${NEWARGS[@]} $@
+            fi
         else
             $lxcbin $@
         fi
