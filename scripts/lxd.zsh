@@ -45,7 +45,7 @@ if [ "$lxcbin" != "" ]; then
                     *)
                         NEWARGS+=("$1")
                         HOST=`echo $1 | cut -s -d: -f 1`
-                        if [[ "${HOST}" == "" ]]; then HOST=$(lxc remote list --format csv | cut -d ',' -f 1 | grep '(default)' | sed 's/ (default)//'); fi
+                        if [[ "${HOST}" == "" ]]; then HOST=$(lxc remote list | grep '(default) | ' | cut -d ' ' -f 2); fi
                         shift
                         ;;
                 esac
