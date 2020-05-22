@@ -18,7 +18,7 @@ function zsh_install() {
     curl -L https://iterm2.com/shell_integration/zsh -o ~/.zsh/frameworks/iterm2_shell_integration.zsh
     echo "Installing custom scripts..."
     local TAR=$(tar --version)
-    if [[ $(gtar >/dev/null 2>&1; echo $?) ]]; then
+    if type "gtar" > /dev/null 2>&1; then
         curl -L https://git.io/rejsmont.zsh.tar.gz | gtar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
     elif [[ ${TAR#'tar (GNU tar)'} != ${TAR} ]]; then
         curl -L https://git.io/rejsmont.zsh.tar.gz | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
@@ -39,7 +39,7 @@ function zsh_update() {
     curl -L https://iterm2.com/shell_integration/zsh -o ~/.zsh/frameworks/iterm2_shell_integration.zsh
     echo "Updating custom scripts..."
     local TAR=$(tar --version)
-    if [[ $(gtar >/dev/null 2>&1; echo $?) ]]; then
+    if type "gtar" > /dev/null 2>&1; then
         curl -L https://git.io/rejsmont.zsh.tar.gz | gtar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
     elif [[ ${TAR#'tar (GNU tar)'} != ${TAR} ]]; then
         curl -L https://git.io/rejsmont.zsh.tar.gz | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
