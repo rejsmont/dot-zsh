@@ -38,15 +38,14 @@ function zsh_update() {
     echo "Updating iTerm2 integration..."
     curl -L https://iterm2.com/shell_integration/zsh -o ~/.zsh/frameworks/iterm2_shell_integration.zsh
     echo "Updating custom scripts..."
-    local TAR=$(tar --version)
-    if [[ ${TAR#'tar (GNU tar)'} != ${TAR} ]]; then
-        curl -L https://git.io/rejsmont.zsh.tar.gz | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
-    elif [[ $(gtar >/dev/null 2>&1; echo $?) ]]; then
+    if [[ $(gtar >/dev/null 2>&1; echo $?) ]]; then
         curl -L https://git.io/rejsmont.zsh.tar.gz | gtar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
+    elif [[ ${$(tar --version)#'tar (GNU tar)'} != ${TAR} ]]; then
+        curl -L https://git.io/rejsmont.zsh.tar.gz | tar -zxvC ~/.zsh --strip-components 2 --wildcards \*/scripts/\*.zsh
     else
         local TS=$(date +%s)
         mkdir -p /tmp/zsh_install_$TS
-        curl -L https://git.io/rejsmont.zsh.tar.gz | gtar -zxvC /tmp/zsh_install
+        curl -L https://git.io/rejsmont.zsh.tar.gz | tar -zxvC /tmp/zsh_install
         mv /tmp/zsh_install/*/scripts/*.zsh ~/.zsh/
         rm -rf /tmp/zsh_install_$TS
     fi
