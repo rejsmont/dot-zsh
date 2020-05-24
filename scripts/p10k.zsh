@@ -19,6 +19,7 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    my_slurm                # slurm queue status
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -440,6 +441,21 @@
 
   function instant_prompt_my_user() {
     prompt_my_user
+  }
+
+  function prompt_my_slurm() {
+    if [[ -v LOADEDMODULES ]] && [[ ${LOADEDMODULES%slurm*} != ${LOADEDMODULES} ]]; then
+      local running=$(squeue -h -t running -u $USER | wc -l)
+      if (( running > 0 )); then
+        p10k segment -f 39 -b 0 -i '' -s RUNNING -t $running
+      fi
+      local pending=$(squeue -h -t pending -u $USER | wc -l)
+      if (( pending > 0 )); then
+        p10k segment -f 39 -b 0 -i '' -s PENDING -t $pending
+      fi
+    else
+      return
+    fi
   }
 
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
