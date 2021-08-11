@@ -25,8 +25,8 @@ function zsh_install() {
     else
         local TS=$(date +%s)
         mkdir -p /tmp/zsh_install_$TS
-        curl -L https://git.io/rejsmont.zsh.tar.gz | gtar -zxvC /tmp/zsh_install
-        mv /tmp/zsh_install/*/scripts/*.zsh ~/.zsh/
+        curl -L https://git.io/rejsmont.zsh.tar.gz | tar -f - -zxvC /tmp/zsh_install_$TS
+        mv /tmp/zsh_install_$TS/*/scripts/*.zsh ~/.zsh/
         rm -rf /tmp/zsh_install_$TS
     fi
 }
